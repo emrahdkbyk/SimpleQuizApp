@@ -1,0 +1,57 @@
+﻿@model IEnumerable<WebAppTest.Models.Soru>
+
+@{
+    ViewBag.Title = "TestOl";
+}
+
+<style>
+    .soruBlok {
+        border: 1px solid #bdbdbd;
+        width: 75%;
+        border-radius: 4px;
+        margin-top: 40px;
+        background-color: #f0ffff;
+        padding: 8px;
+    }
+
+        .soruBlok p {
+            color: darkred;
+            padding: 2%;
+        }
+</style>
+
+<h3>@ViewBag.SinavAd </h3>
+<hr />
+@using (Html.BeginForm())
+{
+
+    int count = 1, countR = 1;
+
+    foreach (var soru in Model)
+    {
+        <div class="soruBlok">
+            <span class="label label-warning"> @string.Format("{0}{1}.", "Soru-", count)</span>
+
+            <p>@soru.SoruMetni <br /> Puan Değeri: (@soru.PuanDegeri)</p>
+
+            @foreach (var item in soru.Secenekler)
+            {
+                <label>
+                    <input type="radio" name="@String.Format("{0}_{1}","Soru",soru.SoruId)"
+                           id="@string.Format("{0}_{1}_{2}", "SecenekRadio",count, countR)"
+                           value="@item.SecenekId">@item.SecenekMetni
+                    </label><br />
+                    countR++;
+                }
+        </div>
+        countR = 1;
+        count++;
+    }
+
+    <button type="submit" id="SubmitQuiz" class="btn btn-default"
+            style="margin-top: 10px;">
+        <span class="glyphicon glyphicon-ok"></span> Testi Bitir
+    </button>
+}
+
+
