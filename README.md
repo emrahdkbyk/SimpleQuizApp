@@ -1,2 +1,2 @@
 # edRepo
-simple quiz app
+simple quiz app-asp.net mvc
